@@ -1,0 +1,89 @@
+---
+server:
+  servlet:
+    context-path: /com.studio.f
+  port: 8081
+spring:
+  profiles:
+    active: developer # test server configuration
+  application: 
+    name: com.studio.f.auth
+  jmx:
+    default-domain: com.studio.f.auth
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  file: logs/production_profile_app.log
+  pattern:
+      file: "%d %-5level [%thread] %logger{0} : %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+#    org.hibernate: DEBUG
+    org.springframework.security.oauth2: debug
+
+info.app.name: OAuth-SSO
+info.app.description: OAuth - Single Sign On platform
+info.app.version: 1.0.0
+---
+spring:
+  profiles: developer # test server configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/oauth?zeroDateTimeBehavior=convertToNull
+    username: root
+    password: mysql
+    driver-class-name:  com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
+    tomcat:
+      initial-size: 10
+      max-idle: 60
+      min-idle: 10
+      max-active: 80
+      test-while-idle: true
+      validation-query: SELECT 1
+      test-on-borrow: false
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 1800000
+      num-tests-per-eviction-run: 10
+      remove-abandoned: true
+      remove-abandoned-timeout: 180
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      naming:
+        naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+
+check-user-scopes: true
+---
+spring:
+  profiles: test # test server configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/oauth?zeroDateTimeBehavior=convertToNull
+    username: root
+    password: mysql
+    driver-class-name:  com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
+    tomcat:
+      initial-size: 10
+      max-idle: 60
+      min-idle: 10
+      max-active: 80
+      test-while-idle: true
+      validation-query: SELECT 1
+      test-on-borrow: false
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 1800000
+      num-tests-per-eviction-run: 10
+      remove-abandoned: true
+      remove-abandoned-timeout: 180
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      naming:
+        naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+
+check-user-scopes: true
